@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evan Wassmann</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #0d1117;
+            --secondary-color: #161b22;
+            --accent-color: #238636;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --gradient: linear-gradient(135deg, #238636, #2ea043);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--gradient);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-30px) rotate(120deg); }
+            66% { transform: translateY(15px) rotate(240deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(35, 134, 54, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .typing-animation {
+            border-right: 2px solid var(--accent-color);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: transparent; }
+            51%, 100% { border-color: var(--accent-color); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(35, 134, 54, 0.3);
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 20px;
+            border: 3px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-category h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(35, 134, 54, 0.2);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(35, 134, 54, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+          /* Project image */
+       .project-image img {
+           width: 100%;
+           height: 350px;
+           object-fit: cover;
+           display: block;
+        }
+       @media (max-width: 900px) {
+           .project-image img { height: 160px; }
+        }
+        /* Resume preview */
+       .resume-embed {
+           background: var(--secondary-color);
+           border: 1px solid var(--border-color);
+           border-radius: 12px;
+           overflow: hidden;
+       }
+       .resume-embed iframe {
+           width: 100%;
+           height: 700px;
+           border: 0;
+           display: block;
+       }
+       @media (max-width: 900px) {
+           .resume-embed iframe { height: 420px; }
+       }
+        .project-card {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(139, 148, 158, 0.1);
+            color: var(--text-secondary);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 12px 24px;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section {
+                padding: 60px 5%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Evan Wassmann</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <!-- <li><a href="assets/resume/Evan_Wassmann_Resume.pdf" target="_blank" rel="noopener" download>Resume</a></li> -->
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Evan Wassmann</h1>
+            <p class="subtitle">Robotics Engineer & <span class="typing-animation" id="typing-text">AI Researcher</span></p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title fade-in">About Me</h2>
+        <div class="about-content fade-in">
+            <div class="about-image">
+                <img src="portfolio_images/headshot.jpeg" alt="Profile" class="profile-img">
+            </div>
+            <div class="about-text">
+                <p>I'm a passionate robotics engineer currently pursuing my Master's in Mechanical Engineering at Carnegie Mellon University (GPA 3.96). With hands-on experience in SLAM, computer vision, and autonomous systems, I specialize in developing intelligent robotic solutions.</p>
+                <p>My journey spans from surgical robotics automation to farm robotics, where I've integrated cutting-edge technologies like GTSAM, sampling based planners, and transformer models. I thrive on solving complex perception and mapping challenges that push the boundaries of what robots can achieve.</p>
+                <p>When I'm not in the lab, you'll find me lifting weights, doing brazilian jiu-jitsu, and mentoring the next generation of engineers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2 class="section-title fade-in">Skills & Technologies</h2>
+        <div class="skills-grid fade-in">
+            <div class="skill-category">
+                <h3>Robotics & AI</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">SLAM</span>
+                    <span class="skill-tag">Computer Vision</span>
+                    <span class="skill-tag">Deep Learning</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">OpenCV</span>
+                    <span class="skill-tag">GTSAM</span>
+                    <span class="skill-tag">ReID</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Programming</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">ROS</span>
+
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Nvidia Isaac</span>
+                    <span class="skill-tag">Optimization</span>
+                    <span class="skill-tag">Controls</span>
+                    <span class="skill-tag">Sensor Fusion</span>
+                    <span class="skill-tag">Depth Cameras</span>
+                    <span class="skill-tag">IMU</span>                    
+                    <span class="skill-tag">MOVEit</span>
+                    <span class="skill-tag">RTK GPS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <h2 class="section-title fade-in">Featured Projects</h2>
+        <div class="projects-grid fade-in">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="portfolio_images/ar4.jpg" alt="Sterile Processing Automation demo">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Sterile Processing Automation</h3>
+                    <p class="project-description">At Surgical Vision Systems, I collaborated with a surgeon and sterile
+                        processing technicians at the University of Maryland Medical Center to identify repetitive, time-
+                        consuming steps in the sterile processing procedure that could benefit from automation. Sterile
+                        processing technicians work to clean, sterilize, and pack surgical instruments so they are ready
+                        for upcoming procedures. We determined that automation of sorting and ordering of surgical
+                        implements after they had been cleaned and checked would provide significant benefit. I helped
+                        to integrate a six-degree-of-freedom robotic arm into the workflow by sourcing the arm,
+                        developing the software for detection and control, and designing custom end effectors. Staff saw
+                        potential to reduce human error, free time for higher-level quality control, and decrease post-
+                        surgical infection rates, while also improving job satisfaction and retention by relieving
+                        technicians of tedious tasks.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ROS</span>
+                        <span class="tech-tag">MOVEit</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">Segment Anything Model</span>
+                        <span class="tech-tag">Grounding DINO</span>
+                    </div>
+                    <!-- <div class="project-links">
+                        <a href="#" class="project-link">Case Study</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="portfolio_images/objectmodel.png" alt="Sterile Processing Automation demo">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Object-Centric SLAM Research</h3>
+                    <p class="project-description">At the Computational Engineering and Robotics Laboratory at CMU, I have
+                        developed a novel category-level object model for use in Semantic Simultaneous Localization
+                        and Mapping (SLAM) systems. Semantic SLAM goes beyond simply measuring an environment
+                        to perceiving it and mapping meaningful elements. Category-level object models are learned
+                        based on instances of objects within a class and provide compact, generalizable representations
+                        of these objects in a scene. My model leverages semantic keypoints and their relationships to
+                        represent object shape and improve the accuracy of measurements. This is the first object model
+                        used in SLAM that does not require solving for the object pose to inform measurements and
+                        estimate object shape. Objects can then be enrolled with fewer detected keypoints than
+                        previously. Additionally, articulated objects, such as backhoes, can maintain the same optimized
+                        shape while in many different configurations - something previously impossible and a barrier to
+                        using object shape for re-identification in dynamic environments. The implementation of this
+                        model has been a success jointly optimizing for object shape, location, and robot pose. Preliminary results show an improvement of 3.8% in localization RSME and 7.4 % in mapping RSME over not using an object model. </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">SLAM</span>
+                        <span class="tech-tag">GTSAM</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">C++</span>
+                    </div>
+                    <!-- <div class="project-links">
+                        <a href="#" class="project-link">Research Paper</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div> -->
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="portfolio_images/Reliance.jpg" alt="Sterile Processing Automation demo">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Farm Automation Robot</h3>
+                    <p class="project-description">While interning at Reliance Roboics, a startup focused on developing low-cost agricultural robots to assist farmers with 
+                        tasks such as monitoring fences, detecting predators, and tracking livestock, I focused on prototyping and software.  I sourced and purchased sensors for the prototype,
+                        including RTK GPS, depth cameras, and IMUs, and implemented the magdwick sensor fusion algorithm to estimate orientation. In addition to hardware integration, I developed computer vision algorithms to follow farm staff and respond to hand gestures using deep learning models and OpenCV.
+                        Testing was a sucess, the robot was able to follow GPS waypoints with centimeter-level accuracy and respond to hand gestures in real-time.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">RTK GPS</span>
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">Sensor Fusion</span>
+                    </div>
+                    <!-- <div class="project-links">
+                        <a href="#" class="project-link">Demo Video</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div> -->
+                </div>
+            </div>
+             <div class="project-card">
+                <div class="project-image">
+                    <img src="portfolio_images/Collage w TSNE.jpg" alt="Sterile Processing Automation demo">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Grounded ReID for SLAM</h3>
+                    <p class="project-description"> Data association in object-centric simultaneous localization and mapping frameworks allows for greater scene understanding, more accurate loop closure, and improved handling of dynamic objects. 
+                        Currently most systems that utilize object based loop closure rely on mapping of class label based topographical object maps, however, in cases where objects may be dynamic, environments are cluttered, 
+                        or in other cases of positional uncertainty these techniques commonly fail. 
+                        On this project I am working to improve object-centric data association techniques by implementing grounded re-identification strategies based on deep learned embeddings to improve object tracking by associating observations of the same object across different viewpoints and time steps during training.
+                        I have sourced large (500k+ images) multi viewpoint datasets for the task and am currently testing several state of the art deep learning models including ConvNext and DEIT to extract robust feature embeddings for object re-identification.  These feature embeddings are grounded with natural language embeddings formed from descriptions of the objects in the image and embedded with CLIP. 
+                        Preliminary results show improvements in object tracking under large viewpoint changes when compared to feature embeddings alone. 
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pytorch</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">Computer Vision</span>
+                    </div>
+                    <!-- <div class="project-links">
+                        <a href="#" class="project-link">Demo Video</a>
+                        <a href="#" class="project-link">GitHub</a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title fade-in">Let's Connect</h2>
+        <div class="contact-content fade-in">
+            <p class="contact-text">I'm always interested in new opportunities and exciting projects. Whether you want to work together or just say hi, I'd love to hear from you!</p>
+            <div class="contact-links">
+                <a href="mailto:evanjwassmann@gmail.com" class="contact-link">
+                    <span>📧</span> Email
+                </a>
+                <a href="portfolio_images/EvanWassmannResume_11_12_2025.pdf" class="contact-link" target="_blank" rel="noopener" download>
+                    <span>📄</span> Download Resume
+               </a>
+                <a href="https://github.com/EWassmann" class="contact-link">
+                    <span>🐙</span> GitHub
+                </a>
+                <a href="https://linkedin.com/in/evanwassmann" class="contact-link">
+                    <span>💼</span> LinkedIn
+                </a>
+                <a href="tel:240-855-4326" class="contact-link">
+                    <span>📱</span> Phone
+                </a>
+            </div>
+        </div>
+    </section>
+    <section id="resume" class="section">
+        <h2 class="section-title fade-in">Resume</h2>
+        <div class="resume-embed fade-in">
+            <iframe src="portfolio_images/EvanWassmannResume_11_12_2025.pdf#toolbar=0" title="Resume"></iframe>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Evan Wassmann </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Typing animation
+        const texts = ['Perception Specialist', 'AI Researcher', 'SLAM Expert', 'Problem Solver'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let currentText = '';
+        let isDeleting = false;
+
+        function typeText() {
+            const typingElement = document.getElementById('typing-text');
+            
+            if (isDeleting) {
+                currentText = texts[textIndex].substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                currentText = texts[textIndex].substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            typingElement.textContent = currentText;
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === texts[textIndex].length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(typeText, typeSpeed);
+        }
+
+        // Start typing animation
+        typeText();
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(13, 17, 23, 0.98)';
+            } else {
+                header.style.background = 'rgba(13, 17, 23, 0.95)';
+            }
+        });
+
+        // Add some interactive hover effects
+        document.querySelectorAll('.project-card, .skill-category').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
