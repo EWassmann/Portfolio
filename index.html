@@ -491,6 +491,143 @@
             transform: translateY(0);
         }
 
+        /* Design Projects Section */
+        .design-section {
+            padding: 100px 0;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .design-section .section-title {
+            padding: 0 5%;
+        }
+
+        .design-project {
+            width: 100%;
+            padding: 4rem 5%;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .design-project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .design-project:hover::before {
+            opacity: 1;
+        }
+
+        .design-project-header {
+            max-width: 1200px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .design-project-header h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .design-project-header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 800px;
+        }
+
+        .design-images-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .design-image-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--secondary-color);
+            aspect-ratio: 4/3;
+        }
+
+        .design-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .design-image-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .design-image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(13,17,23,0.92));
+            padding: 2rem 1.25rem 1rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .design-image-item:hover .design-image-caption {
+            transform: translateY(0);
+        }
+
+        .design-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .design-image-placeholder svg {
+            opacity: 0.3;
+        }
+
+        .design-project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+        }
+
+        @media (max-width: 900px) {
+            .design-images-grid {
+                grid-template-columns: 1fr;
+            }
+            .design-image-item {
+                aspect-ratio: 16/9;
+            }
+            .design-image-caption {
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
@@ -545,6 +682,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#design">Design</a></li>
                 <!-- <li><a href="assets/resume/Evan_Wassmann_Resume.pdf" target="_blank" rel="noopener" download>Resume</a></li> -->
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -739,13 +877,83 @@
         </div>
     </section>
 
+    <!-- Design Projects Section -->
+    <section id="design" class="design-section">
+        <h2 class="section-title fade-in">Design Projects</h2>
+
+        <!-- Design Project 1 -->
+        <div class="design-project fade-in">
+            <div class="design-project-header">
+                <h3>Camping Cupholder</h3>
+                <p>In this project I designed a lighweght foldable cupholder for backpacking. The cupholder is lazer cut from lightweight acrylic and can fold for easy storage. Additionally it has a built in clip to attach to a backpack when it is assemebled or stored.</p>
+            </div>
+            <div class="design-images-grid">
+                <div class="design-image-item">
+                    <!-- Replace src with your image path, e.g. src="portfolio_images/design1_img1.jpg" -->
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/CupFlyer.png" alt="Cupholder flyer">
+                    </div>
+                    <div class="design-image-caption">Flyer for the camping cupholder.</div>
+                </div>
+                <div class="design-image-item">
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/Cupholder1.png" alt="Cupholder design">
+                        <span>Add image</span>
+                    </div>
+                    <div class="design-image-caption">Unfolder version of the camping cupholder.</div>
+                </div>
+                <div class="design-image-item">
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/Cupholder2.png" alt="Cupholder final">
+                    </div>
+                    <div class="design-image-caption">Folded version of the camping cupholder.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Design Project 2 -->
+        <div class="design-project fade-in">
+            <div class="design-project-header">
+                <h3>A Better Bouquet Holder</h3>
+                <p>In this project I designed a better bouquet holder. Being a broke masters student, when I got my girlfriend flowers we did not have a vase to put them in. I quickly realized that vases have tapered necks to disply the flowers more nicely than a pint glass could. To fix this issue I designed a bouquet holder where the bottom tears off and it can be placed on top of a pint glass to hold the flowers in a visually appealing way.</p>
+            </div>
+            <div class="design-images-grid">
+                <div class="design-image-item">
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/Bouquetflyer.png" alt="Bouquet holder design">
+                        <span>Add image</span>
+                    </div>
+                    <div class="design-image-caption">Flyer for the better bouquet holder.</div>
+                </div>
+                <div class="design-image-item">
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/Bouquet1.png" alt="problem being solved">
+                        <span>Add image</span>
+                    </div>
+                    <div class="design-image-caption">TFlowers just don't look good in a pint glass.</div>
+                </div>
+                <div class="design-image-item">
+                    <div class="design-image-placeholder">
+                        <img src="portfolio_images/Bouquet2.png" alt="Bouquet holder final">
+
+                    </div>
+                    <div class="design-image-caption">With this attachment they do.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
     <!-- Contact Section -->
+
     <section id="contact" class="section">
         <h2 class="section-title fade-in">Let's Connect</h2>
         <div class="contact-content fade-in">
             <p class="contact-text">I'm always interested in new opportunities and exciting projects. Whether you want to work together or just say hi, I'd love to hear from you!</p>
             <div class="contact-links">
-                <a href="mailto:evanjwassmann@gmail.com" class="contact-link">
+                <a href="/cdn-cgi/l/email-protection#26435047484c514755554b47484866414b474f4a0845494b" class="contact-link">
                     <span>📧</span> Email
                 </a>
                 <a href="portfolio_images/EvanWassmannResume_11_12_2025.pdf" class="contact-link" target="_blank" rel="noopener" download>
@@ -774,7 +982,7 @@
         <p>&copy; 2024 Evan Wassmann </p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -860,7 +1068,6 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
             });
-            
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
