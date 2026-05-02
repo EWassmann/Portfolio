@@ -504,9 +504,11 @@
 
         .design-project {
             width: 100%;
-            padding: 4rem 5%;
+            padding: 2rem 5%;
             border-top: 1px solid var(--border-color);
             position: relative;
+            cursor: pointer;
+            transition: padding 0.4s ease, background 0.3s ease;
         }
 
         .design-project::before {
@@ -521,18 +523,53 @@
             transition: opacity 0.3s ease;
         }
 
-        .design-project:hover::before {
+        .design-project.expanded::before {
             opacity: 1;
         }
 
+        .design-project.expanded {
+            padding: 4rem 5%;
+            background: rgba(255,255,255,0.015);
+        }
+
+        /* Collapsed header: h3 always visible, p hidden until expanded */
         .design-project-header {
             max-width: 1200px;
-            margin: 0 auto 2.5rem auto;
+            margin: 0 auto 0 auto;
+            transition: margin 0.4s ease;
+        }
+
+        .design-project.expanded .design-project-header {
+            margin-bottom: 2.5rem;
         }
 
         .design-project-header h3 {
             font-size: 1.8rem;
             color: var(--text-primary);
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: margin-bottom 0.4s ease;
+        }
+
+        /* Small expand hint arrow */
+        .design-project-header h3::after {
+            content: '›';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            opacity: 0.6;
+            display: inline-block;
+            transition: transform 0.35s ease, opacity 0.3s ease;
+            margin-left: 0.2rem;
+        }
+
+        .design-project.expanded .design-project-header h3::after {
+            transform: rotate(90deg);
+            opacity: 1;
+        }
+
+        .design-project.expanded .design-project-header h3 {
             margin-bottom: 0.75rem;
         }
 
@@ -541,14 +578,36 @@
             font-size: 1.05rem;
             line-height: 1.7;
             max-width: 800px;
+            /* Hide description by default */
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.4s ease;
         }
 
+        .design-project.expanded .design-project-header p {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        /* Images grid — collapsed: show only first image; expanded: show all 3 */
         .design-images-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
+        }
+
+        /* In collapsed state override to single column */
+        .design-project:not(.expanded) .design-images-grid {
+            grid-template-columns: 1fr;
+            max-width: 480px;
+        }
+
+        /* Hide 2nd and 3rd images when collapsed */
+        .design-project:not(.expanded) .design-image-item:nth-child(n+2) {
+            display: none;
         }
 
         .design-image-item {
@@ -558,12 +617,13 @@
             border: 1px solid var(--border-color);
             background: var(--secondary-color);
             aspect-ratio: 1/1.4142;
+            transition: border-color 0.3s ease;
         }
 
         .design-image-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
             transition: transform 0.4s ease;
         }
@@ -625,6 +685,14 @@
             }
             .design-image-caption {
                 transform: translateY(0);
+            }
+            /* On small screens, show all images always */
+            .design-project:not(.expanded) .design-image-item:nth-child(n+2) {
+                display: block;
+            }
+            .design-project:not(.expanded) .design-project-header p {
+                max-height: none;
+                opacity: 1;
             }
         }
 
@@ -1224,6 +1292,14 @@
             } else {
                 header.style.background = 'rgba(13, 17, 23, 0.95)';
             }
+        });
+
+        // Click to expand/collapse design projects
+        document.querySelectorAll('.design-project').forEach(project => {
+            project.addEventListener('click', function(e) {
+                if (e.target.closest('a')) return;
+                this.classList.toggle('expanded');
+            });
         });
 
         // Add some interactive hover effects
